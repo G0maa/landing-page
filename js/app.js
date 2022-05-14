@@ -39,7 +39,6 @@
 */
 
 // #### build the nav ####
-
 // Dynamically counting sections:
 const sectionList = document.getElementsByTagName('section');
 
@@ -69,9 +68,18 @@ navBarList.appendChild(anchorList);
 // Add class 'active' to section when near top of viewport
 
 
+// #### Smooth scroll on nav-bar ####
 // Scroll to anchor ID using scrollTO event
+navBarList.addEventListener('click', function(evt) {
+    if(evt.target.nodeName === 'A') {
+        evt.preventDefault();
+        
+        const evtTarget = evt.target.getAttribute('href');
+        document.querySelector(evtTarget).scrollIntoView({behavior: 'smooth'});
+    }
+});
 
-
+// Stopped here, what's left: add class `your-active-class` when each section gets into view.
 /**
  * End Main Functions
  * Begin Events
