@@ -38,7 +38,32 @@
  * 
 */
 
-// build the nav
+// #### build the nav ####
+
+// Dynamically counting sections:
+const sectionList = document.getElementsByTagName('section');
+
+// Container for dynamically crated anchors
+let anchorList = document.createDocumentFragment();
+
+for(const element of sectionList) {
+
+    let newAnchor = document.createElement('a');
+    newAnchor.innerHTML = element.getAttribute('data-nav');
+    newAnchor.setAttribute('href', `#${element.getAttribute('id')}`);
+    newAnchor.classList.add('menu__link');
+    
+    let newLi = document.createElement('li');
+    newLi.appendChild(newAnchor);
+
+    anchorList.appendChild(newLi);
+}
+
+// Getting the nav-bar container by ID and appending to the anchorList.
+const navBarList = document.getElementById('navbar__list');
+navBarList.appendChild(anchorList);
+
+
 
 
 // Add class 'active' to section when near top of viewport
