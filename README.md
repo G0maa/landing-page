@@ -1,13 +1,25 @@
 # Landing Page Project
 
-## Table of Contents
+## About the project:
 
-* [Instructions](#instructions)
+After finishing first two weeks of FWD, I was presented with this pracitce project,
+main goal is to practice JS & Manipulating the DOM, also to ensure some clean-code along the way.
 
-## Instructions
+## Tasks are:
+- Making a dynamic nav-bar, that is depending on the number of sections the nav-bar is dynamically created.
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+- Smooth scoll, nav-bar links has to scroll to each section, and to have a smooth scroll.
 
-To get started, open `js/app.js` and start building out the app's functionality
+- Each section when it gets in `viewport` has to be highlighted & the nav-bar link of that section has to be highlighted too.
 
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+## About the implementation:
+
+* ### Dynamic nav-bar
+
+
+
+* ### Smooth scrolling nav-bar
+  
+
+* ### Section highlight & nav-bar highlighting
+

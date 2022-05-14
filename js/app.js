@@ -1,47 +1,13 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
+// #### Global variables ####
 
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
-/**
- * Define Global Variables
- * 
-*/
-
-
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// #### build the nav ####
-// Dynamically counting sections:
+// List of sections
 const sectionList = document.getElementsByTagName('section');
 
+// Default active section
+let activeSection = sectionList[0];
+let activeAnchor;
+
+// #### build the nav ####
 // Container for dynamically crated anchors
 let anchorList = document.createDocumentFragment();
 
@@ -50,6 +16,7 @@ for(const element of sectionList) {
     let newAnchor = document.createElement('a');
     newAnchor.innerHTML = element.getAttribute('data-nav');
     newAnchor.setAttribute('href', `#${element.getAttribute('id')}`);
+    newAnchor.setAttribute('id', `${element.getAttribute('id')}-anchor`)
     newAnchor.classList.add('menu__link');
     
     let newLi = document.createElement('li');
@@ -63,13 +30,9 @@ const navBarList = document.getElementById('navbar__list');
 navBarList.appendChild(anchorList);
 
 
-
-
-// Add class 'active' to section when near top of viewport
-
-
 // #### Smooth scroll on nav-bar ####
 // Scroll to anchor ID using scrollTO event
+// Note: Client's browser has to have this feature enabled.
 navBarList.addEventListener('click', function(evt) {
     if(evt.target.nodeName === 'A') {
         evt.preventDefault();
@@ -79,17 +42,36 @@ navBarList.addEventListener('click', function(evt) {
     }
 });
 
-// Stopped here, what's left: add class `your-active-class` when each section gets into view.
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
 
-// Build menu 
+// #### Add class 'active' to section when near top of viewport & Highlight nav-bar ####
+document.addEventListener('scroll', function () {
+    let toSetActive;
 
-// Scroll to section on link click
+    for(const section of sectionList) {
+        // Ignore negative values
+        if(section.getBoundingClientRect().top < 0)
+            continue;
+        
+        if(!toSetActive)
+            toSetActive = section;
 
-// Set sections as active
+        if(section.getBoundingClientRect().top < toSetActive.getBoundingClientRect().top)
+            toSetActive = section;
+    }        
+    
+    // Removing & adding active class from active section, new section, respectively
+    activeSection.classList.remove('your-active-class');
+    toSetActive.classList.add('your-active-class');
 
+    // Removing active class from current active anchor
+    document.getElementById(`${activeSection.getAttribute('id')}-anchor`)
+    .classList.remove('menu__link__acitve');
+
+    // Adding active class to new active acnhor
+    document.getElementById(`${toSetActive.getAttribute('id')}-anchor`)
+    .classList.add('menu__link__acitve');
+
+    // Setting new active section
+    activeSection = toSetActive;
+});
 

@@ -88,6 +88,11 @@ section {
     transition: ease 0.3s all;
 }
 
+.menu__link__acitve {
+    background: #333;
+    color: rgb(225, 208, 96) !important;
+}
+
 /* Header Styles */
 .page__header {
     background: #fff;
